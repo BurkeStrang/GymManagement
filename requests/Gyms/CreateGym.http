@@ -1,0 +1,15 @@
+@host=http://localhost:5209
+@subscriptionId=8d4e1e76-2579-4736-a953-43ca02574ad5
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTGlvciIsImZhbWlseV9uYW1lIjoiTWFudGluYmFuZCIsImVtYWlsIjoibGlvckBtYW50aW5iYW5kLmNvbSIsImlkIjoiZTMxZWVjODctNmNmNi00MGE5LWJlMWUtZmNiMzExM2JmZDJmIiwicGVybWlzc2lvbnMiOlsiZ3ltczpjcmVhdGUiLCJneW1zOnVwZGF0ZSJdLCJhZG1pbklkIjoiMmMwZDdiMGUtODMxMi00NzNhLWFlMjQtYzQ2ZDNjYjU4Y2I4Iiwicm9sZXMiOiJBZG1pbiIsImV4cCI6MTcwMTM3MDkyOCwiaXNzIjoiR3ltTWFuYWdlbWVudCIsImF1ZCI6Ikd5bU1hbmFnZW1lbnQifQ.BC2Y6DHDql2WhNgU5yw5rpayM7I7eiI0fEAxnYNSb5U
+
+POST {{host}}/subscriptions/{{subscriptionId}}/gyms
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "Name": "Amiko123"
+}
+
+###
+
+http://localhost:5051/subscriptions/51b5d6fd-75fe-44d9-a56f-2dcde66fad56/gyms/59bf64b3-fee6-4403-9631-d1a4f57cb032
