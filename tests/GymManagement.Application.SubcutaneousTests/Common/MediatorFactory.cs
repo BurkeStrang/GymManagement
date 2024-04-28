@@ -34,12 +34,11 @@ public class MediatorFactory : WebApplicationFactory<IAssemblyMarker>, IAsyncLif
 
             var user = new ClaimsPrincipal(
                 new ClaimsIdentity(
-                    new List<Claim>
-                    {
+                    [
                         new("id", Guid.NewGuid().ToString()),
                         new(ClaimTypes.Name, "TestUser"),
                         new(ClaimTypes.Role, "Admin")
-                    },
+                    ],
                     "TestAuthenticationType"
                 )
             );

@@ -9,17 +9,11 @@ public class ApiController : ControllerBase
 {
     protected IActionResult Problem(List<Error> errors)
     {
-        if (errors.Count is 0)
-        {
-            return Problem();
-        }
-
-        if (errors.All(error => error.Type == ErrorType.Validation))
-        {
-            return ValidationProblem(errors);
-        }
-
-        return Problem(errors[0]);
+        return errors.Count is 0
+            ? Problem()
+            : errors.All(error => error.Type == ErrorType.Validation)
+                ? ValidationProblem(errors)
+                : Problem(errors[0]);
     }
 
     protected IActionResult Problem(Error error)
@@ -42,9 +36,7 @@ public class ApiController : ControllerBase
 
         foreach (var error in errors)
         {
-            modelStateDictionary.AddModelError(
-                error.Code,
-                error.Description);
+            modelStateDictionary.AddModelError(error.Code, error.Description);
         }
 
         return ValidationProblem(modelStateDictionary);
