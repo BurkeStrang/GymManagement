@@ -1,4 +1,3 @@
-using ErrorOr;
 using GymManagement.Application.Gyms.Commands.AddTrainer;
 using GymManagement.Application.Gyms.Commands.CreateGym;
 using GymManagement.Application.Gyms.Commands.DeleteGym;
@@ -7,7 +6,6 @@ using GymManagement.Application.Gyms.Queries.ListGyms;
 using GymManagement.Contracts.Gyms;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace GymManagement.Api.Controllers;
 
@@ -15,12 +13,12 @@ namespace GymManagement.Api.Controllers;
 public class GymsController(ISender _mediator) : ApiController
 {
     [HttpPost]
-    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)] // Successful response
-    [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)] // Validation error
-    [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
-    [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
-    [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
-    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
+    [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
+    [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)]
+    [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)]
+    [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)]
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> CreateGym(
         CreateGymRequest request,
         Guid subscriptionId)
@@ -43,7 +41,7 @@ public class GymsController(ISender _mediator) : ApiController
     [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
     [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
     [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
-    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> DeleteGym(Guid subscriptionId, Guid gymId)
     {
         var command = new DeleteGymCommand(subscriptionId, gymId);
@@ -61,7 +59,7 @@ public class GymsController(ISender _mediator) : ApiController
     [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
     [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
     [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
-    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> ListGyms(Guid subscriptionId)
     {
         var command = new ListGymsQuery(subscriptionId);
@@ -79,7 +77,7 @@ public class GymsController(ISender _mediator) : ApiController
     [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
     [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
     [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
-    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> GetGym(Guid subscriptionId, Guid gymId)
     {
         var command = new GetGymQuery(subscriptionId, gymId);
@@ -97,7 +95,7 @@ public class GymsController(ISender _mediator) : ApiController
     [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
     [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
     [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
-    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)]
     public async Task<IActionResult> AddTrainer(AddTrainerRequest request, Guid subscriptionId, Guid gymId)
     {
         var command = new AddTrainerCommand(subscriptionId, gymId, request.TrainerId);
