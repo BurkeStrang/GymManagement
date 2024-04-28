@@ -14,6 +14,12 @@ public class ProfilesController(ISender _mediator) : ApiController
 {
     [HttpPost("admin")]
     [Authorize]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)] // Successful response
+    [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)] // Validation error
+    [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
+    [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
+    [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
     public async Task<IActionResult> CreateAdminProfile(Guid userId)
     {
         var command = new CreateAdminProfileCommand(userId);
@@ -26,6 +32,12 @@ public class ProfilesController(ISender _mediator) : ApiController
     }
 
     [HttpGet]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)] // Successful response
+    [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)] // Validation error
+    [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
+    [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
+    [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
     public async Task<IActionResult> ListProfiles(Guid userId)
     {
         var listProfilesQuery = new ListProfilesQuery(userId);

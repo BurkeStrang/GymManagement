@@ -10,6 +10,12 @@ namespace GymManagement.Api.Controllers;
 public class RoomsController(ISender _mediator) : ApiController
 {
     [HttpPost]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)] // Successful response
+    [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)] // Validation error
+    [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
+    [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
+    [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
     public async Task<IActionResult> CreateRoom(
         CreateRoomRequest request,
         Guid gymId)
@@ -28,6 +34,12 @@ public class RoomsController(ISender _mediator) : ApiController
     }
 
     [HttpDelete("{roomId:guid}")]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)] // Successful response
+    [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)] // Validation error
+    [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
+    [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
+    [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
     public async Task<IActionResult> DeleteRoom(
         Guid gymId,
         Guid roomId)

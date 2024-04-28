@@ -12,6 +12,12 @@ namespace GymManagement.Api.Controllers;
 public class SubscriptionsController(ISender _mediator) : ApiController
 {
     [HttpPost]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)] // Successful response
+    [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)] // Validation error
+    [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
+    [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
+    [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
     public async Task<IActionResult> CreateSubscription(CreateSubscriptionRequest request)
     {
         if (!DomainSubscriptionType.TryFromName(
@@ -40,6 +46,12 @@ public class SubscriptionsController(ISender _mediator) : ApiController
     }
 
     [HttpGet("{subscriptionId:guid}")]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)] // Successful response
+    [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)] // Validation error
+    [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
+    [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
+    [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
     public async Task<IActionResult> GetSubscription(Guid subscriptionId)
     {
         var query = new GetSubscriptionQuery(subscriptionId);
@@ -54,6 +66,12 @@ public class SubscriptionsController(ISender _mediator) : ApiController
     }
 
     [HttpDelete("{subscriptionId:guid}")]
+    [ProducesResponseType(typeof(string), StatusCodes.Status200OK)] // Successful response
+    [ProducesResponseType(typeof(object), StatusCodes.Status400BadRequest)] // Validation error
+    [ProducesResponseType(typeof(object), StatusCodes.Status404NotFound)] // Not found
+    [ProducesResponseType(typeof(object), StatusCodes.Status403Forbidden)] // Unauthorized
+    [ProducesResponseType(typeof(object), StatusCodes.Status409Conflict)] // Conflict
+    [ProducesResponseType(typeof(object), StatusCodes.Status500InternalServerError)] 
     public async Task<IActionResult> DeleteSubscription(Guid subscriptionId)
     {
         var command = new DeleteSubscriptionCommand(subscriptionId);
